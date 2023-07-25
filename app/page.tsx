@@ -1,16 +1,7 @@
 import { FeedService } from "@/lib/feedService"
-import { EuropaRSS, EuropaRSSItem } from "@/models/europaRss";
-import { FeedStats } from "@/models/feedStats";
-import { BoltIcon } from "@heroicons/react/20/solid";
-import { LightBulbIcon } from "@heroicons/react/24/solid";
-import Link from "next/link";
-import { ItemFeed } from "./components/ItemFeed";
-import { FeedStatsPanel } from "./components/FeedStatsPanel";
+import { EuropaRSS } from "@/models/europaRss";
+import { FeedDashboard } from "./components/FeedDashboard";
 
-enum ViewingMode {
-  All,
-  PublishedInPastWeek
-}
 
 export default async function Home() {
   const feedService = new FeedService();
@@ -29,13 +20,9 @@ export default async function Home() {
     </main>
   }
 
-  const feedStatistics: FeedStats = feedService.getFeedStatistics(feed);
-  const feedItems: EuropaRSSItem[] = feedService.getFeedItems(feed);
-
   return (
     <main className="flex flex-col">
-      <FeedStatsPanel stats={feedStatistics} />
-      <ItemFeed items={feedItems} />
+      <FeedDashboard feed={feed} />
     </main>
   )
 }
